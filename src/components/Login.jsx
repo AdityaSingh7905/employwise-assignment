@@ -6,11 +6,14 @@ import { AuthContext } from "../context/AuthContext";
 export default function Login() {
   const { token, setToken } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  // email validation
   const [email, setEmail] = useState("");
   const [emailIsTouched, setEmailIsTouched] = useState(false);
   const emailIsValid = email.trim().length > 0;
   const emailHasError = !emailIsValid && emailIsTouched;
 
+  // password validation
   const [password, setPassword] = useState("");
   const [passwordIsTouched, setPasswordIsTouched] = useState(false);
   const passwordIsValid = password.trim().length > 0;
@@ -21,6 +24,7 @@ export default function Login() {
 
   const API_BASE_URL = "https://reqres.in";
 
+  // form submission handling
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!emailIsValid || !passwordIsValid) {

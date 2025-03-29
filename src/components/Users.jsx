@@ -21,23 +21,26 @@ export default function Users() {
 
   // Fetch users from API
   useEffect(() => {
-    if (users.length === 0) {
-      const fetchUsers = async () => {
-        try {
-          const res = await fetch(`${API_BASE_URL}?page=${currentPage}`);
-          const data = await res.json();
-          if (data.data.length === 0) {
-            setUsers([]);
-          } else {
-            setUsers(data.data);
-          }
-        } catch (err) {
-          setError("Failed to fetch users.");
-        } finally {
-          setLoading(false);
+    const fetchUsers = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}?page=${currentPage}`);
+        const data = await res.json();
+        if (data.data.length === 0) {
+          setUsers([]);
+        } else {
+          setUsers(data.data);
         }
-      };
+      } catch (err) {
+        setError("Failed to fetch users.");
+      } finally {
+        setLoading(false); //Ensure loading is set to false
+      }
+    };
+
+    if (users.length === 0) {
       fetchUsers();
+    } else {
+      setLoading(false); //If users exist, still stop loading
     }
   }, [currentPage, users]);
 
@@ -60,6 +63,7 @@ export default function Users() {
         method: "DELETE",
       });
       if (res.ok) {
+        // remove the user from the user list using filter
         setUsers(users.filter((user) => user.id !== userToDelete.id));
       } else {
         throw new Error("Failed to delete user.");
@@ -122,7 +126,12 @@ export default function Users() {
 
       <div className="flex justify-center items-center mt-8 space-x-4">
         <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          onClick={() => {
+            setCurrentPage((prev) => Math.max(prev - 1, 1));
+            // setting users to empty so that when pages change fetchUsers() is called and
+            // users are fetched from the api
+            setUsers([]);
+          }}
           disabled={currentPage === 1}
           className={`px-4 py-2 font-semibold rounded-md ${
             currentPage === 1
@@ -134,7 +143,10 @@ export default function Users() {
         </button>
         <span className="text-gray-800 font-semibold">Page {currentPage}</span>
         <button
-          onClick={() => setCurrentPage((prev) => prev + 1)}
+          onClick={() => {
+            setCurrentPage((prev) => prev + 1);
+            setUsers([]);
+          }}
           className="bg-blue-500 font-semibold text-white px-4 py-2 rounded-md hover:bg-blue-600"
         >
           Next

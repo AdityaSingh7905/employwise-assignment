@@ -4,7 +4,7 @@ import Loading from "./Loading";
 import { AuthContext } from "../context/AuthContext";
 
 export default function EditUser() {
-  const { id } = useParams();
+  const { id } = useParams(); // id of the user
   const { users, setUsers } = useContext(AuthContext);
 
   // Convert id to a number because it is a string
@@ -14,21 +14,25 @@ export default function EditUser() {
 
   const navigate = useNavigate();
 
+  // email validation
   const [userEmail, setUserEmail] = useState("");
   const [userEmailIsTouched, setUserEmailIsTouched] = useState(false);
   const userEmailIsValid = userEmail.trim().length > 0;
   const userEmailHasError = !userEmailIsValid && userEmailIsTouched;
 
+  // firstName validation
   const [userFirstName, setUserFirstName] = useState("");
   const [userFirstNameIsTouched, setUserFirstNameIsTouched] = useState(false);
   const userFirstNameIsValid = userFirstName.trim().length > 0;
   const userFirstNameHasError = !userFirstNameIsValid && userFirstNameIsTouched;
 
+  // lastName validation
   const [userLastName, setUserLastName] = useState("");
   const [userLastNameIsTouched, setUserLastNameIsTouched] = useState(false);
   const userLastNameIsValid = userLastName.trim().length > 0;
   const userLastNameHasError = !userLastNameIsValid && userLastNameIsTouched;
 
+  // avatar
   const [userAvatar, setUserAvatar] = useState("");
 
   const [error, setError] = useState(null);
@@ -66,6 +70,7 @@ export default function EditUser() {
     setUserLastNameIsTouched(true);
   };
 
+  // handling form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!userEmailIsValid || !userFirstNameIsValid || !userLastNameIsValid) {
@@ -93,7 +98,7 @@ export default function EditUser() {
           user.id === updatedUser.id ? updatedUser : user
         )
       );
-      navigate("/users");
+      navigate("/users"); // go to users page
     } catch (err) {
       setError(err.message);
     } finally {
