@@ -12,30 +12,35 @@ A React-based User Management System that allows users to view, update, and dele
 ✅ **Real-Time Updates** – Changes (edits & deletions) reflect instantly.  
 ✅ **Responsive UI** – Works on all screen sizes (desktop, tablet, mobile).  
 
-## 🛠 Tech Stack
-**Frontend** : React.js, Tailwind CSS, React Router
-**State Management** : Context API
-**API** : ReqRes (https://reqres.in/)
+## 🛠️ Tech Stack  
+**Frontend:** React.js, Tailwind CSS, React Router  
+**State Management:** Context API  
+**API:** [ReqRes](https://reqres.in/)  
 
 ## 📂 Project Setup
 Follow these steps to run the project locally:
 
-### 1️⃣ Clone the Repository
-**git clone (https://github.com/AdityaSingh7905/employwise-assignment)**
-**cd employwise-assignment**
+### 1️⃣ Clone the Repository  
+```sh
+git clone https://github.com/AdityaSingh7905/employwise-assignment
+cd employwise-assignment
+```
+### 2️⃣ Install Dependencies  
+```sh
+npm install
+```
 
-### 2️⃣ Install Dependencies
-**npm install**
-
-### 3️⃣ Start the Development Server
-**npm start**
+### 3️⃣ Start the Development Server  
+```sh
+npm start
+```
 The app will be available at http://localhost:3000.
 
-### 🔄 How to Use
-**View Users** – The homepage lists all users with pagination.
-**Edit User** – Click the "Edit" button → Update details → Click "Save".
-**Delete User** – Click "Delete" → Confirm deletion in the modal.
-**Pagination** – Click "Next" or "Previous" to navigate pages.
+### 🔄 How to Use  
+**View Users** – The homepage lists all users with pagination.  
+**Edit User** – Click the "Edit" button → Update details → Click "Save".  
+**Delete User** – Click "Delete" → Confirm deletion in the modal.  
+**Pagination** – Click "Next" or "Previous" to navigate pages.  
 
 ## API Endpoints  
 | **Action**      | **Method** | **Endpoint**                            |
